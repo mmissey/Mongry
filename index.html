@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Feeder</title>
+    
+    <meta name="description" content="Feeder Game for 50cubes game jam" />
+
+	<link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />  
+<style>
+#playboard{
+	margin: 0 auto;
+	width:700px;
+	height: 700px;
+	overflow:hidden;
+	position:relative;
+	background: #000;
+}  
+
+#lightcanvas{
+	pointer-events:none;
+}
+
+.board{
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.step{
+	-webkit-backface-visibility: hidden;  
+}
+
+.whiteout{
+	background:white !important;
+}
+</style>
+</head>
+
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <a href="#tutorial" onclick="tutorial()">
+		<div id="title" class="step" data-x="0" data-y="1000" data-z="-100" data-rotate-x="-40" data-rotate-y="100" data-rotate-z="0" style='background:url(img/title_screen.png); height:768px; width:768px;'>
+        </div>
+	</a>
+
+    <div id="tutorial" class="step" data-x="-1000" data-y="-2000" data-z="-1600" data-rotate-x="-40" data-rotate-y="200" data-rotate-z="0">
+         <a href="#play" onclick="init(); ">  
+			<div id="tutcontain">
+
+			<div class="tutplayer tutobj">
+				<div class="tutinfo one">
+				<p> The Monster's Hungry! </p>
+				</div>
+			</div>
+			<div class="tutmonster tutobj"> 
+
+			    <div class="tutmonbody tutobj"></div>
+			    <div class="tutmonhead tutobj"></div>
+				<div class="tutdoor tutobj">
+					<div class="tutinfo four">
+					<p> White Doors Lead You Back To The Monster </p>
+					</div>
+				</div> 
+			</div>
+
+			    <div class="tutbadie  tutobj">
+			    	<div class="tutinfo two">
+					<p> Get The Spiders </p>
+					</div>
+			    </div>
+			    <div class="tutplayer tutobj"></div>
+
+			</div>
+	</a>
+    </div> 
+
+    <div id="play" class="step" data-x="-2000" data-y="2000" data-z="-100" data-rotate-x="-40" data-rotate-y="300" data-rotate-z="0">
+ 		<div id="playboard"> 
+			<div id="mover">
+				<canvas id="floorcanvas" class="board" width="2000" height="2000"></canvas>
+				<canvas id="lightcanvas" class="board" width="2000" height="2000"></canvas>    
+ 				<canvas id="playcanvas" class="board" width="2000" height="2000"></canvas>   
+			</div>
+		</div>
+		<div>
+			<div id="monsterimage"></div>
+			<div id="hunger">
+				<div id="hungerLevel">
+				</div>
+			</div>
+		</div>
+		<div>
+		<div id="foodimage"></div>
+		<div id="supply">
+			<div id="supplyLevel" class="blue">
+			</div>
+		</div>
+	</div>
+		<div id='foundItems'></div>
+    </div> 
+
+    <div id="win" class="step" data-x="1000" data-y="4000" data-z="-100" data-rotate-x="40" data-rotate-y="10" data-rotate-z="0">
+         <a href="#play"> 
+			<div class="tutmonster tutobj"> 
+			    <div class="tutmonbody tutobj"></div> 
+			    <div class="tutmonhead tutobj eating"></div>    
+			</div>
+		</a> 
+    </div>
+
+	<div id="lose" class="step" data-x="1000" data-y="3000" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-rotate-z="0">                     
+    </div> 
+
+    <div id="credits" class="step" data-x="0" data-y="6000" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-rotate-z="0">
+        <a href="#title"> <p>credits</p>
+
+	<h1>Development:</h1>    
+	<p>Daniel Cohen</p>                   
+	<p>Isaac Greenbride</p>                   
+	<p>Marc Missey</p>
+	<h1>Art &amp; Design:</h1>                
+	<p>Wing Lai</p>                    
+	<p>Drew Lytle</p>                  
+	<p>Tonya Warner</p>                    
+	<p>The internets</p>
+	<h1>Sound Design:</h1>        
+	<p>Tonya Warner</p> 
+		 </a>   
+    </div>
+</div>
+
+
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="js/impress.js"></script>
+<script src="js/jrumble.js"></script>
+<script type="text/javascript" src='js/RoomItem.js'></script>
+<script type="text/javascript" src='js/Room.js'></script>
+<script type="text/javascript" src='js/Door.js'></script>
+<script type="text/javascript" src='js/DEFAULTS.js'></script>
+<script type="text/javascript" src='js/RoomGenerator.js'></script>
+<script type="text/javascript" src='js/level_generator.js'></script> 
+<script type="text/javascript" src='js/buffer-loader.js'></script>   
+<script type="text/javascript" src='js/audioManager.js'></script> 
+<script src="js/roomnav.js"></script> 
+<script src="js/hud.js"></script> 
+<script type="text/javascript" src="js/Box2dWeb-2.1.a.3.js"></script>    
+<script>
+impress().init();
+$('#playboard').jrumble({
+	x: 4,
+	y: 4,
+	speed: 0,
+	rotation: 1
+})
+
+var world;
+var b2Vec2 = Box2D.Common.Math.b2Vec2,
+	b2BodyDef = Box2D.Dynamics.b2BodyDef,
+	b2Body = Box2D.Dynamics.b2Body,
+	b2FixtureDef = Box2D.Dynamics.b2FixtureDef,
+	b2Fixture = Box2D.Dynamics.b2Fixture,
+	b2World = Box2D.Dynamics.b2World,
+	b2MassData = Box2D.Collision.Shapes.b2MassData,
+	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape,
+	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape,
+	b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
+
+</script> 
+
+<script type="text/javascript" src="js/collectgen.js"></script>   
+<script type="text/javascript" src="js/gameboard.js"></script> 
+
+<script> 
+function tutorial() { 
+	
+	    setTimeout(function() {  
+	$('.tutinfo').hide(); 
+    $('#tutcontain').addClass('start');
+    $('.tutinfo.one').show(); 
+
+    setTimeout(function() {
+	   $('.tutinfo').hide(); 
+       $('#tutcontain').addClass('tutone');
+
+        setTimeout(function() {
+			$('.tutinfo').hide();
+			$('.tutinfo.two').show(); 
+            $('#tutcontain').addClass('tuttwo');
+
+        setTimeout(function() {
+			$('.tutinfo').hide(); 
+			$('.tutinfo.three').show();
+            $('#tutcontain').addClass('tutthree');
+
+        setTimeout(function() {
+			$('.tutinfo').hide(); 
+			$('.tutinfo.four').show();
+            $('#tutcontain').addClass('tutfour');
+
+        setTimeout(function() {
+			$('.tutinfo').hide(); 
+			$('.tutinfo.five').show();
+            $('#tutcontain').addClass('tutfive');
+            $('.tutmonhead').addClass('eating');  
+
+			setTimeout(function(){
+			    $('#tutcontain').removeClass('start tutone tuttwo tutthree tutfour tutfive');
+	            $('#tutcontain .tutmonhead').removeClass('eating');
+			}, 5000);
+
+        }, 2500);        
+        }, 2500);
+        }, 2500);
+        }, 2500);
+    }, 2500);
+}, 1500);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+
+	<!-- Use the .htaccess and remove these lines to avoid edge case issues.
+		 More info: h5bp.com/i/378 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+
+	<!-- Mobile viewport optimized: h5bp.com/viewport -->
+	<meta name="viewport" content="width=device-width">
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+
+	<link rel="stylesheet" href="css/libs/bootstrap.css">
+	<link rel="stylesheet" href="css/libs/bootstrap-responsive.css">   
+	<!-- build:css css/site.min.css -->
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/loading.css">
+	<link rel="stylesheet" href="css/spree.css">
+	<link rel="stylesheet" href="css/wallet.css">
+	<!-- endbuild -->
+	<link rel="stylesheet" href="css/fancybox/fancybox.css">      
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/themes/base/jquery-ui.css"> 
+	<link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+	<!-- build:tests -->
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.10.0.css"> 
+	<!-- endbuild -->
+	<!-- More ideas for your <head> here: h5bp.com/d/head-Tips -->
+
+	<!-- All JavaScript at the bottom, except this Modernizr build.
+		 Modernizr enables HTML5 elements & feature detects for optimal performance.
+		 Create your own custom Modernizr build: www.modernizr.com/download/ -->
+<script src="js/libs/angular-1.0.1.js"></script>   
+<script src="js/libs/modernizr-2.5.3.min.js"></script>  
+<!-- Pegasus Modernizr tests --> 
+
+</head>
+<body ng-app="pegasus" class="impress-not-supported">
+	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
+		 chromium.org/developers/how-tos/chrome-frame-getting-started -->
+	<!--[if lt IE 9]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+<div id="container">
+
+<!-- build:tests -->
+<qunit></qunit>
+<!-- endbuild --> 
+
+<div style="position:relative; top:0; left:0; width:100%;">
+
+	<div id="view" ng-view></div>
+	<userstate></userstate> 
+	<div id="wallet">
+		<div ng-controller="setTimer" id="pie_to_be">
+			<canvas id="pie_timer" width="50" height="50" style=""></canvas>
+			<div class="btn hide" id="claimer" style="margin-left: -50px;" ng-click="getPaycheck(userState)">Claim Paycheck</div> 
+		</div>
+		
+	</div>  
+</div>
+
+<div id="impress">
+
+
+    <div id="home" class="step slide" data-x="0"  data-y="0" data-z="200" data-scale="1" data-rotate-y="0">
+
+    	<div class="mymyhider">
+			<h1>Trending Feed</h1>
+			<div class="myhider">
+				<landingfeed></landingfeed>
+			</div>
+        </div>
+    </div>
+
+    <div id="discover" class="step slide" data-x="1250" data-y="0" data-z="0" data-scale="1" data-rotate-y="70">
+       <h1>Discover</h1>
+
+        <div class="myhider">  
+ 		<catalog></catalog>  
+        </div>
+	</div>
+
+    <div id="closet" class="step slide" data-x="2200" data-y="0" data-z="0" data-scale="1" data-rotate-y="140">
+
+       	<h1>Closet</h1> 
+		<div class="myhider">  
+			<closet></closet>
+        </div>
+    </div>
+
+    <div id="outfitcreator" class="step slide" data-x="3200" data-y="0" data-z="400" data-scale="1" data-rotate-y="210">
+
+		<h1>Look Creator</h1>
+		<div class="myhider">  
+			<ocreate></ocreate>	 
+        </div>
+    </div>
+
+
+
+    <div id="games" class="step slide" data-x="100" data-y="1000" data-z="200" data-scale="1" data-rotate-y="280">
+
+		<h1>Mini Games</h1>
+        <div class="myhider">  
+			<plinko></plinko>
+		</div>	 
+    </div>
+
+</div>
+
+</div>
+	<!-- JavaScript at the bottom for fast page loading -->
+
+	<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script> 
+	<script src="js/libs/bootstrap.js"></script>
+	<script src="js/libs/iscroll.js"></script>   
+	<script src="js/libs/Box2dWeb-2.1.a.3.min.js"></script>   
+	<script src="js/script.js"></script>
+	<script src="js/math.js"></script>
+	<script src="js/canvasexport.js"></script>
+	<!-- build:tests -->
+	<script src="js/qunit.js"></script>
+	<script src="mod/catalog.test.js"></script> 
+	<script src="http://code.jquery.com/qunit/qunit-1.10.0.js"></script>
+	<!-- endbuild -->
+
+	<!-- build:js js/plugins.min.js -->
+	<script src="js/plugins/active/fancybox.js"></script>
+	<script src="js/plugins/active/pietimer.js"></script> 
+	<script src="js/plugins/active/harmony.js"></script>
+	<script src="js/plugins/active/impress.js"></script>
+	<script src="js/plugins/active/json2.js"></script>
+	<script src="js/plugins/active/jstorage.js"></script>
+	<script src="js/plugins/active/jquery.inview.js"></script>
+	<script src="js/plugins/active/log.js"></script>
+	<script src="js/plugins/active/jquery.masonry.js"></script>
+	<!-- endbuild -->
+
+	<!-- build:js js/mod.min.js -->
+	<script src="mod/outfitCreator.js"></script>   
+	<script src="mod/userdata.js"></script>
+	<script src="mod/login.js"></script>  
+	<script src="mod/wallet.js"></script>
+	<script src="mod/catalog.js"></script> 
+	<script src="mod/loading.js"></script>
+	<script src="mod/closet.js"></script>
+	<script src="mod/bracelet.js"></script> 
+	<script src="mod/saver.js"></script>  
+	<script src="mod/emoticons.js"></script>
+	<script src="mod/games/spree.js"></script> 
+	<script src="mod/games/plinko.js"></script>
+	<script src="mod/landingfeed.js"></script> 
+	<script src="mod/productDetail.js"></script> 
+	<script src="mod/modal.js"></script> 
+	<!-- endbuild -->
+
+  <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+       mathiasbynens.be/notes/async-analytics-snippet -->
+  <script>
+    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script')); 
+
+	if ("ontouchstart" in document.documentElement) { 
+	    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+	} 
+
+	</script>
+
+
+<!--  Move this Later -->
+	<script>
+	
+ //   impress().init(); 
+
+	$('.nexter').on('click', function(){
+		api.next(); 
+		return false;
+	});
+
+	$('.prever').on('click', function(){
+		api.prev(); 
+		return false;
+	});
+
+	</script>
+</body>
+</html>
