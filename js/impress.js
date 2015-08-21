@@ -283,7 +283,7 @@ var updateLoop = undefined;
                 if(step['id'] == "play"){
                     try{
                         // var updateInterval = $("#impress").data("gameUpdateInterval");
-                        if(updateInterval != undefined && updateInterval=="gameStarted"){
+                        if((typeof updateInterval != "undefined") && updateInterval=="gameStarted"){
                             updateInterval = window.setInterval(update, 1000 / 60);
                             // $("#impress").data("gameUpdateInterval", updateInterval);
                         }
@@ -303,7 +303,7 @@ var updateLoop = undefined;
                 lastEntered = null;
                 if(step['id'] == "play"){
                     // var updateInterval = $("#impress").data("gameUpdateInterval");
-                    if(updateInterval != undefined){
+                    if(typeof updateInterval != "undefined"){
                         clearInterval(updateInterval);
                         // $("#impress").data("gameUpdateInterval", "gameStarted");
                         updateInterval = "gameStarted";
