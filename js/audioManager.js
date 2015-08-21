@@ -20,7 +20,7 @@ audioManager.sounds = {};
 audioManager.bufferLoader = undefined;
 ;
 audioManager.initSounds = function() {
-  audioManager.context = new webkitAudioContext();
+  audioManager.context = new AudioContext();
   audioManager.bufferLoader = new BufferLoader(audioManager.context, audioManager.files, audioManager.loadSounds);
   audioManager.bufferLoader.load();
 }
@@ -46,7 +46,12 @@ audioManager.playSound = function(buffer, time, loop) {
 	if(loop){
 		source.loop = true;
 	}
-	source.noteOn(time);
+    if(time){
+        source.start(time);
+    }else{
+        source.start();
+    }
+	
 	return source;
 }
 
@@ -56,8 +61,10 @@ audioManager.allOff = function(){
 }
 audioManager.startTheme = function(){
 	if(audioManager.theme == undefined){
-		audioManager.theme = audioManager.playSound(audioManager.sounds['soundtrack'], 0, true);
-		audioManager.theme.gain.value = 0.5;
+		audioManager.theme = audioManager.playSound(audioManager.sounds['soundtrack'], 0, true, 0.5);
+		var gainNode = audioManager.context.createGain();
+        gainNode.connect(audioManager.theme.context.destination);
+        gainNode.gain.volume = 0.5;
 	}else{
 		audioManager.theme.connect(audioManager.context.destination);
 	}
